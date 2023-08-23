@@ -1,20 +1,36 @@
+    function tocaSom (seletorAudio) {
+        const elemento = document.querySelector(seletorAudio);
+        
+        if (elemento != null && elemento.localName === 'audio'){
+            console.log(elemento.localName);
+            
+            elemento.play();
+        } else {
+            alert('Tem nada aqui meu(minha) bom(boa) digita certo aew');
+        }
+
+    }
     
-    var numero1 = prompt("digita um numero de 1 a 5");
-    while (numero1 > 5){
-        alert('nada disso, tem que ser de 1 a 5');
-        numero1 = prompt("digite um numero de 1 a 5");
-    }
+    const listaDeTeclas = document.querySelectorAll('.tecla');
 
-    var numero2 = prompt("digita um numero de 1 a 5");
-    while (numero2 > 5){
-        alert('nada disso, tem que ser de 1 a 5');
-        numero2 = prompt("digite um numero de 1 a 5");
-    }
-    var diferenca = numero1 - numero2;
+    
+    for(let i = 0; i < listaDeTeclas.length; i++) {
+        
+        const tecla = listaDeTeclas[i]; 
+        const instrumento = tecla.classList[1];
+        const idAudio = `#som_${instrumento}`;
+    
+        tecla.onclick = function () {
+            tocaSom(idAudio)
+        }
 
-    if (diferenca != 0){
-        alert("A diferença foi de " + diferenca + " no valor do seu número... só isso kkkkkk" );
-    } else {
-        alert("zerado amigo... o valor é igual a 0")
-    }
+        tecla.onkeydown = function(e) {
+            if (e.code === 'Space' || e.code === 'Enter'){
+                tecla.classList.add('ativa'); 
+            }
+        }
 
+        tecla.onkeyup = function() {
+            tecla.classList.remove('ativa'); 
+        }
+    } 
